@@ -1,0 +1,479 @@
+<title>Saoni's Gaura Diya Path</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Bangla&family=Mukta:wght@400;500;700&display=swap">
+<style>
+  :root{
+    color-scheme: dark;
+    --night:#150f2b;
+    --night-2:#221946;
+    --river:#1d2f5a;
+    --saffron:#f2921d;
+    --marigold:#ffc94a;
+    --lotus:#ee8fab;
+    --tulsi:#6f9a5c;
+    --paper:#f7ecd4;
+    --ink:#3a2410;
+    --text:#f3e7cf;
+    --muted:#b7aad0;
+    --line:rgba(255,201,74,.22);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{min-height:100%}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 500px at 50% -120px, #3a2a6e 0%, transparent 65%),
+      radial-gradient(1.5px 1.5px at 12% 18%, #fff8 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 78% 9%, #fff9 50%, transparent 51%),
+      radial-gradient(1px 1px at 35% 30%, #fff7 50%, transparent 51%),
+      radial-gradient(1px 1px at 62% 24%, #fff6 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 90% 34%, #fff7 50%, transparent 51%),
+      radial-gradient(1px 1px at 22% 44%, #fff5 50%, transparent 51%),
+      linear-gradient(180deg, var(--night) 0%, var(--night-2) 60%, var(--river) 100%);
+    background-attachment: fixed;
+    color:var(--text);
+    font-family:"Mukta", "Segoe UI", system-ui, sans-serif;
+    font-size:17px;
+    line-height:1.55;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding-inline:18px;padding-block:28px 60px;display:flex;flex-direction:column;gap:26px}
+  h1,h2,.display{font-family:"Yatra One", "Mukta", serif;font-weight:400;text-wrap:balance;margin:0}
+  .bn{font-family:"Tiro Bangla", "Mukta", serif}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold);opacity:.85}
+
+  /* Intro */
+  .intro{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;padding-top:10px}
+  .intro .bn{font-size:clamp(34px,8vw,52px);color:var(--marigold);line-height:1.2;text-shadow:0 0 24px rgba(242,146,29,.45)}
+  .intro h1{font-size:clamp(26px,6vw,38px);color:var(--text)}
+  .intro p{max-width:52ch;color:var(--muted);margin:0}
+  .btn{
+    font:inherit;font-weight:700;font-size:17px;cursor:pointer;
+    color:var(--ink);background:linear-gradient(180deg,var(--marigold),var(--saffron));
+    border:0;border-radius:999px;padding:12px 28px;
+    box-shadow:0 6px 24px rgba(242,146,29,.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(242,146,29,.5)}
+  .btn:focus-visible,.opt:focus-visible{outline:3px solid var(--lotus);outline-offset:3px}
+
+  /* Diya path */
+  .path{
+    position:relative;
+    display:grid;grid-template-columns:repeat(10,1fr);gap:4px;
+    padding:18px 10px 12px;
+    border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);
+  }
+  .path-labels{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:-18px}
+  .diya{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:58px;position:relative}
+  .flame{
+    width:12px;height:20px;border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
+    background:radial-gradient(circle at 50% 70%, #fff6d0 0%, var(--marigold) 35%, var(--saffron) 70%, transparent 72%);
+    opacity:0;transform:scale(.3);transform-origin:50% 100%;
+    transition:opacity .5s ease, transform .5s cubic-bezier(.3,1.6,.5,1);
+    margin-bottom:-2px;
+  }
+  .bowl{
+    width:34px;height:13px;border-radius:0 0 20px 20px / 0 0 14px 14px;
+    background:linear-gradient(180deg,#6b4a2c,#3f2917);
+    border-top:3px solid #8a6038;
+  }
+  .diya.lit .flame{opacity:1;transform:scale(1);animation:flicker 1.6s ease-in-out infinite alternate}
+  .diya.lit .bowl{background:linear-gradient(180deg,#c9803a,#7a4a1e);border-top-color:var(--marigold);box-shadow:0 -10px 26px rgba(255,201,74,.45)}
+  .diya.current .bowl{outline:2px dashed rgba(255,201,74,.5);outline-offset:4px}
+  @keyframes flicker{0%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.08,.95) rotate(2deg)}100%{transform:scale(.95,1.06) rotate(-1deg)}}
+
+  /* Question card */
+  .card{
+    background:rgba(21,15,43,.72);
+    border:1px solid var(--line);border-radius:18px;
+    padding:22px 20px;display:flex;flex-direction:column;gap:16px;
+    backdrop-filter:blur(4px);
+  }
+  .qmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .qmeta .place{color:var(--lotus);font-size:14px}
+  .q{font-size:clamp(20px,4.6vw,24px);line-height:1.35;color:var(--text)}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media (max-width:520px){.opts{grid-template-columns:1fr}}
+  .opt{
+    font:inherit;text-align:left;cursor:pointer;
+    color:var(--text);background:rgba(255,255,255,.04);
+    border:1px solid rgba(183,170,208,.3);border-radius:12px;
+    padding:12px 14px;transition:background .15s, border-color .15s, transform .15s;
+  }
+  .opt:hover:not(:disabled){background:rgba(255,201,74,.08);border-color:var(--marigold)}
+  .opt.right{background:rgba(111,154,92,.25);border-color:var(--tulsi);color:#e9f5e1}
+  .opt.wrong{border-color:var(--lotus);opacity:.55;animation:shake .35s}
+  .opt:disabled{cursor:default}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .feedback{min-height:0;border-radius:12px;padding:0;color:var(--text);font-size:16px}
+  .feedback.show{padding:12px 14px;background:rgba(255,201,74,.08);border-left:3px solid var(--marigold)}
+  .feedback.hint{background:rgba(238,143,171,.08);border-left-color:var(--lotus)}
+  .row{display:flex;justify-content:flex-end}
+
+  /* Finale */
+  .finale{text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+  .finale h2{font-size:clamp(30px,7vw,44px);color:var(--marigold);text-shadow:0 0 22px rgba(242,146,29,.5)}
+  .finale p{color:var(--muted);margin:0;max-width:50ch}
+  .envelope{
+    cursor:pointer;border:0;padding:0;background:none;
+    width:min(300px,100%);aspect-ratio:3/2;max-width:100%;position:relative;
+    filter:drop-shadow(0 12px 30px rgba(0,0,0,.45));
+    transition:transform .2s;
+  }
+  .envelope:hover{transform:translateY(-3px) rotate(-1deg)}
+  .envelope .body{position:absolute;inset:0;background:linear-gradient(160deg,#f7e2b8,#e8c98f);border-radius:10px}
+  .envelope .flap{position:absolute;left:0;right:0;top:0;height:60%;background:linear-gradient(180deg,#eccd92,#ddb26c);clip-path:polygon(0 0,100% 0,50% 100%);border-radius:10px 10px 0 0}
+  .envelope .seal{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e0506f,#9c2240);display:grid;place-items:center;color:#ffe3ea;font-family:"Yatra One",serif;font-size:20px;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+  .envelope .to{position:absolute;bottom:14px;left:0;right:0;color:var(--ink);font-family:"Yatra One",serif;font-size:18px}
+
+  .letter{
+    background:var(--paper);color:var(--ink);
+    border-radius:6px;padding:30px 26px 34px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    display:flex;flex-direction:column;gap:14px;
+    font-size:18px;line-height:1.7;
+    background-image:linear-gradient(180deg,rgba(242,146,29,.10),transparent 30%);
+    animation:rise .8s ease both;
+  }
+  .letter .salute{font-family:"Yatra One",serif;font-size:24px;color:#9c2240}
+  .letter p{margin:0}
+  .letter .sign{font-family:"Yatra One",serif;font-size:22px;color:#9c2240;text-align:right;margin-top:6px}
+  .letter .bn{font-size:20px;color:#8a4b12}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  .again{background:none;border:1px solid var(--line);color:var(--muted);font:inherit;border-radius:999px;padding:8px 18px;cursor:pointer}
+
+  /* Hero halo */
+  .halo{position:relative;width:220px;height:220px;max-width:100%;display:grid;place-items:center;margin-bottom:4px}
+  .mandala{
+    position:absolute;inset:0;border-radius:50%;
+    background:
+      repeating-conic-gradient(from 0deg, rgba(255,201,74,.22) 0deg 6deg, transparent 6deg 15deg);
+    -webkit-mask:radial-gradient(circle, transparent 38%, #000 40%, #000 68%, transparent 70%);
+            mask:radial-gradient(circle, transparent 38%, #000 40%, #000 68%, transparent 70%);
+    animation:spin 60s linear infinite;
+  }
+  .mandala.m2{
+    inset:22px;
+    background:repeating-conic-gradient(from 7deg, rgba(238,143,171,.30) 0deg 10deg, transparent 10deg 30deg);
+    -webkit-mask:radial-gradient(circle, transparent 50%, #000 52%, #000 64%, transparent 66%);
+            mask:radial-gradient(circle, transparent 50%, #000 52%, #000 64%, transparent 66%);
+    animation-direction:reverse;animation-duration:80s;
+  }
+  .halo::before{content:"";position:absolute;inset:40px;border-radius:50%;background:radial-gradient(circle, rgba(255,201,74,.35), transparent 70%);animation:breathe 3.5s ease-in-out infinite}
+  .bigdiya{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:34px}
+  .bflame{width:26px;height:44px;border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
+    background:radial-gradient(circle at 50% 72%, #fff8dc 0%, #ffe07a 28%, var(--saffron) 62%, transparent 66%);
+    filter:drop-shadow(0 0 14px rgba(255,190,60,.9));transform-origin:50% 100%;animation:flicker 1.4s ease-in-out infinite alternate;margin-bottom:-4px}
+  .bbowl{width:84px;height:30px;border-radius:0 0 50px 50px / 0 0 30px 30px;
+    background:linear-gradient(180deg,#d98b3c,#7a4418);border-top:5px solid var(--marigold);
+    box-shadow:0 -14px 40px rgba(255,201,74,.45), inset 0 -6px 10px rgba(0,0,0,.25)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes breathe{0%,100%{opacity:.6;transform:scale(.92)}50%{opacity:1;transform:scale(1.05)}}
+
+  /* Progress bar */
+  .progress{height:4px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:10px}
+  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--saffron),var(--marigold),var(--lotus));transition:width .6s ease;box-shadow:0 0 12px var(--marigold)}
+
+  /* Option badges */
+  .opt{display:flex;align-items:center;gap:12px}
+  .opt .k{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;
+    border:1px solid rgba(255,201,74,.45);color:var(--marigold)}
+  .opt.right .k{background:var(--tulsi);border-color:var(--tulsi);color:#fff}
+  .card{position:relative;
+    background:linear-gradient(rgba(24,17,50,.85),rgba(24,17,50,.85)) padding-box,
+               linear-gradient(135deg,rgba(255,201,74,.55),rgba(238,143,171,.25),rgba(255,201,74,.1)) border-box;
+    border:1px solid transparent;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+  .card.pop{animation:rise .45s ease both}
+
+  /* Letter border, alpana-style */
+  .letter{position:relative;border:2px solid #c98a3a;outline:1px dashed rgba(156,34,64,.45);outline-offset:-10px;padding:40px 32px 40px}
+  .letter .lotus{display:flex;justify-content:center;gap:6px;color:#c0506f;font-size:14px;letter-spacing:.4em}
+
+  canvas#embers{position:fixed;inset:0;pointer-events:none;z-index:0;width:100%;height:100%}
+  .wrap{position:relative;z-index:1}
+  canvas#petals{position:fixed;inset:0;pointer-events:none;z-index:5;width:100%;height:100%}
+  footer{text-align:center;color:var(--muted);font-size:13px;opacity:.8}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+
+<canvas id="embers"></canvas>
+<canvas id="petals"></canvas>
+
+<main class="wrap">
+  <!-- Intro -->
+  <section class="intro" id="intro">
+    <div class="halo" aria-hidden="true">
+      <div class="mandala"></div>
+      <div class="mandala m2"></div>
+      <div class="bigdiya"><div class="bflame"></div><div class="bbowl"></div></div>
+    </div>
+    <span class="eyebrow">Navadwip &rarr; Puri &middot; 10 diyas</span>
+    <div class="bn">শুভ জন্মদিন</div>
+    <h1>Happy Birthday, Saoni</h1>
+    <p>Walk the path of Sri Chaitanya Mahaprabhu, from his birth under the neem tree in Navadwip to the Ratha Yatra in Puri. Answer each question to light a diya. Light all ten, and a letter from Ishan will be waiting for you.</p>
+    <button class="btn" id="start">Begin the journey</button>
+  </section>
+
+  <!-- Diya path -->
+  <section id="pathWrap" hidden>
+    <div class="path" id="path" aria-label="Diyas lit"></div>
+    <div class="path-labels" style="margin-top:6px"><span>Navadwip</span><span>Puri</span></div>
+    <div class="progress"><i id="bar"></i></div>
+  </section>
+
+  <!-- Question -->
+  <section class="card" id="quiz" hidden aria-live="polite">
+    <div class="qmeta">
+      <span class="eyebrow" id="qnum">Diya 1 of 10</span>
+      <span class="place" id="qplace"></span>
+    </div>
+    <div class="q" id="qtext"></div>
+    <div class="opts" id="opts"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="row"><button class="btn" id="next" hidden>Light the next diya</button></div>
+  </section>
+
+  <!-- Finale -->
+  <section class="finale" id="finale" hidden>
+    <span class="eyebrow">All ten diyas are lit</span>
+    <h2>Hari Bol! Gaura Hari Bol!</h2>
+    <p>You walked the whole path, from Navadwip to Puri. Someone left something for you at the end of it.</p>
+    <button class="envelope" id="envelope" aria-label="Open Ishan's letter">
+      <span class="body"></span><span class="flap"></span>
+      <span class="seal">I</span>
+      <span class="to">For Saoni</span>
+    </button>
+  </section>
+
+  <section id="letterWrap" hidden>
+    <article class="letter" id="letter"></article>
+    <div style="text-align:center;margin-top:18px"><button class="again" id="again">Walk the path again</button></div>
+  </section>
+
+  <footer>Made with love &middot; 25 September 2026</footer>
+</main>
+
+<script>
+/* ===== Ishan's letter — edit these lines ===== */
+const LETTER = {
+  salute: "My dearest Saoni,",
+  bengali: "শুভ জন্মদিন, আমার সোনা।",
+  paragraphs: [
+    "You are one of the greatest gifts I ever received from Shama Ju. I hope, with the blessings of Radha Rani, I cherish you for this complete lifetime.",
+    "You are everything I ever asked for. With you I feel loved and cared for. I hope my love for you only grows. I hope I can become a better man for you.",
+    "Wishing you the happiest birthday. Next time I will be there, pakka. Thank you for existing and for coming into my life."
+  ],
+  sign: "Forever yours, Ishan"
+};
+
+/* ===== The journey ===== */
+const QUESTIONS = [
+  { place:"Mayapur, Navadwip · 1486",
+    q:"Mahaprabhu appeared on a full-moon night in 1486. What happened in the sky that night, sending everyone to the Ganga chanting Hari's name?",
+    opts:["A lunar eclipse","A comet","A meteor shower","A solar eclipse"], a:0,
+    fact:"He was born on Phalguni Purnima during a lunar eclipse. That day is celebrated every year as Gaura Purnima." },
+  { place:"Mayapur, Navadwip",
+    q:"As a child he was lovingly called Nimai. Where does the name come from?",
+    opts:["The river Ganga","A neem tree","His grandfather","A village nearby"], a:1,
+    fact:"He was born beneath a neem tree, so Sachi Mata called him Nimai. His golden complexion also earned him the name Gauranga." },
+  { place:"The Mishra household",
+    q:"Who were Mahaprabhu's parents?",
+    opts:["Vasudeva and Devaki","Nanda and Yashoda","Jagannatha Mishra and Sachi Devi","Advaita Acharya and Sita Devi"], a:2,
+    fact:"Jagannatha Mishra and Sachi Devi. Sachi Mata's love for Nimai is one of the sweetest parts of his story." },
+  { place:"Navadwip kirtans",
+    q:"Which two instruments are the heartbeat of the sankirtan he spread?",
+    opts:["Sitar and tabla","Mridanga and kartals","Veena and flute","Harmonium and shehnai"], a:1,
+    fact:"The clay mridanga and the brass kartals. He led huge street kirtans through Navadwip with them." },
+  { place:"The Mahamantra",
+    q:"Which mantra did he give to everyone, regardless of caste or background?",
+    opts:["Om Namah Shivaya","Gayatri Mantra","Hare Krishna Mahamantra","Om Mani Padme Hum"], a:2,
+    fact:"Hare Krishna Hare Krishna, Krishna Krishna Hare Hare, Hare Rama Hare Rama, Rama Rama Hare Hare." },
+  { place:"Nitai-Gaur",
+    q:"Who was his closest companion, always paired with him as Nitai-Gaur?",
+    opts:["Nityananda Prabhu","Haridasa Thakura","Srivasa Thakura","Rupa Goswami"], a:0,
+    fact:"Nityananda Prabhu, lovingly called Nitai. The two are worshipped together as Nitai-Gaura." },
+  { place:"The streets of Navadwip",
+    q:"Which two notorious brothers did Nitai and Gaura transform with love instead of punishment?",
+    opts:["Rupa and Sanatana","Jagai and Madhai","Lava and Kusha","Shrivas and Shrirama"], a:1,
+    fact:"Jagai and Madhai even hurt Nityananda Prabhu, yet he forgave them, and both became devotees." },
+  { place:"Katwa · age 24",
+    q:"When he took sannyasa at Katwa, what name did he receive?",
+    opts:["Gaura Hari","Sri Krishna Chaitanya","Vishvambhara","Nimai Pandit"], a:1,
+    fact:"Keshava Bharati gave him the name Sri Krishna Chaitanya, 'the one who awakens Krishna in every heart'." },
+  { place:"Shikshashtakam",
+    q:"In his eight verses, the Shikshashtakam, he says one should be humbler than a blade of grass and more tolerant than...",
+    opts:["A mountain","The ocean","A tree","The earth"], a:2,
+    fact:"'Trinad api sunichena, taror api sahishnuna.' A tree gives shade even to the one who cuts it." },
+  { place:"Jagannatha Puri",
+    q:"In which holy city did he spend his final years, dancing before Lord Jagannath's chariot at Ratha Yatra?",
+    opts:["Vrindavan","Varanasi","Puri","Dwarka"], a:2,
+    fact:"He lived his last eighteen years in Puri, lost in love for Lord Jagannath. And now all ten diyas are lit." }
+];
+
+const $ = id => document.getElementById(id);
+let i = 0, answered = false, audio = null;
+
+function buildPath(){
+  const p = $("path"); p.innerHTML = "";
+  QUESTIONS.forEach((_,k)=>{
+    const d = document.createElement("div");
+    d.className = "diya"; d.id = "diya"+k;
+    d.innerHTML = '<div class="flame"></div><div class="bowl"></div>';
+    p.appendChild(d);
+  });
+}
+function markCurrent(){
+  document.querySelectorAll(".diya").forEach((d,k)=>d.classList.toggle("current",k===i));
+}
+
+function chime(freqs){
+  try{
+    audio = audio || new (window.AudioContext||window.webkitAudioContext)();
+    const t = audio.currentTime;
+    freqs.forEach((f,n)=>{
+      const o = audio.createOscillator(), g = audio.createGain();
+      o.type="sine"; o.frequency.value=f;
+      g.gain.setValueAtTime(0.0001,t+n*0.08);
+      g.gain.exponentialRampToValueAtTime(0.18,t+n*0.08+0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+n*0.08+1.2);
+      o.connect(g).connect(audio.destination); o.start(t+n*0.08); o.stop(t+n*0.08+1.3);
+    });
+  }catch(e){}
+}
+
+function render(){
+  const Q = QUESTIONS[i]; answered = false;
+  $("qnum").textContent = `Diya ${i+1} of ${QUESTIONS.length}`;
+  $("qplace").textContent = Q.place;
+  $("qtext").textContent = Q.q;
+  const fb = $("feedback"); fb.className="feedback"; fb.textContent="";
+  $("next").hidden = true;
+  const box = $("opts"); box.innerHTML="";
+  Q.opts.forEach((o,k)=>{
+    const b = document.createElement("button");
+    b.className="opt"; b.id=`opt${k}`;
+    b.innerHTML = `<span class="k">${"ABCD"[k]}</span><span></span>`;
+    b.lastChild.textContent = o;
+    b.onclick = ()=>pick(k,b);
+    box.appendChild(b);
+  });
+  markCurrent();
+  const c=$("quiz"); c.classList.remove("pop"); void c.offsetWidth; c.classList.add("pop");
+}
+
+function pick(k,btn){
+  if(answered) return;
+  const Q = QUESTIONS[i], fb = $("feedback");
+  if(k===Q.a){
+    answered = true;
+    btn.classList.add("right");
+    document.querySelectorAll(".opt").forEach(b=>b.disabled=true);
+    $("diya"+i).classList.add("lit");
+    $("bar").style.width = ((i+1)/QUESTIONS.length*100)+"%";
+    fb.className="feedback show"; fb.textContent = Q.fact;
+    chime([880,1318.5]);
+    const last = i===QUESTIONS.length-1;
+    $("next").textContent = last ? "See what's waiting" : "Light the next diya";
+    $("next").hidden = false; $("next").focus();
+  }else{
+    btn.classList.add("wrong"); btn.disabled = true;
+    fb.className="feedback show hint";
+    fb.textContent = "Not this one. Take a breath and try another. Mahaprabhu is patient, and so am I.";
+    chime([220]);
+  }
+}
+
+$("next").onclick = ()=>{
+  i++;
+  if(i<QUESTIONS.length){ render(); }
+  else { finish(); }
+};
+
+$("start").onclick = ()=>{
+  chime([660]);
+  $("intro").hidden = true;
+  $("pathWrap").hidden = false; $("quiz").hidden = false;
+  buildPath(); i=0; $("bar").style.width="0"; render();
+};
+
+function finish(){
+  $("quiz").hidden = true;
+  document.querySelectorAll(".diya").forEach(d=>d.classList.remove("current"));
+  $("finale").hidden = false;
+  chime([523.25,659.25,783.99,1046.5]);
+  petals(7000);
+}
+
+$("envelope").onclick = ()=>{
+  const L = $("letter");
+  L.innerHTML = "";
+  const orn = document.createElement("div"); orn.className="lotus"; orn.textContent="✿ ❀ ✿"; L.appendChild(orn);
+  const s = document.createElement("div"); s.className="salute"; s.textContent=LETTER.salute; L.appendChild(s);
+  const b = document.createElement("p"); b.className="bn"; b.textContent=LETTER.bengali; L.appendChild(b);
+  LETTER.paragraphs.forEach(t=>{ const p=document.createElement("p"); p.textContent=t; L.appendChild(p); });
+  const sg = document.createElement("div"); sg.className="sign"; sg.textContent=LETTER.sign; L.appendChild(sg);
+  L.appendChild(orn.cloneNode(true));
+  $("finale").hidden = true; $("pathWrap").hidden = true;
+  $("letterWrap").hidden = false;
+  window.scrollTo({top:0,behavior:"smooth"});
+  chime([783.99,1046.5,1318.5]);
+  petals(9000);
+};
+
+$("again").onclick = ()=>{
+  $("letterWrap").hidden = true;
+  $("intro").hidden = false;
+};
+
+/* ===== Marigold & lotus petal shower ===== */
+const cv = $("petals"), cx = cv.getContext("2d");
+let parts = [], until = 0, running = false;
+function size(){ cv.width = innerWidth*devicePixelRatio; cv.height = innerHeight*devicePixelRatio; }
+addEventListener("resize", size); size();
+function petals(ms){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  until = performance.now()+ms;
+  if(!running){ running = true; requestAnimationFrame(tick); }
+}
+const COLORS = ["#ffc94a","#f2921d","#ee8fab","#ffb13b","#f6d27a"];
+function tick(t){
+  const W = cv.width, H = cv.height, dpr = devicePixelRatio;
+  if(t<until && parts.length<140){
+    for(let n=0;n<3;n++) parts.push({x:Math.random()*W,y:-20*dpr,vy:(1+Math.random()*1.6)*dpr,vx:(Math.random()-.5)*.8*dpr,r:(5+Math.random()*6)*dpr,a:Math.random()*6.28,va:(Math.random()-.5)*.08,c:COLORS[(Math.random()*COLORS.length)|0],w:Math.random()*6.28});
+  }
+  cx.clearRect(0,0,W,H);
+  parts.forEach(p=>{
+    p.w += .03; p.x += p.vx + Math.sin(p.w)*.6*dpr; p.y += p.vy; p.a += p.va;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.a);
+    cx.fillStyle = p.c; cx.globalAlpha = .9;
+    cx.beginPath(); cx.ellipse(0,0,p.r,p.r*.45,0,0,Math.PI*2); cx.fill();
+    cx.restore();
+  });
+  parts = parts.filter(p=>p.y<H+30*dpr);
+  if(parts.length || t<until) requestAnimationFrame(tick);
+  else { running = false; cx.clearRect(0,0,W,H); }
+}
+
+/* ===== Ambient rising embers ===== */
+(function(){
+  const c=$("embers"), g=c.getContext("2d"); let E=[];
+  function rs(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;}
+  addEventListener("resize",rs); rs();
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  for(let n=0;n<40;n++)E.push(mk(true));
+  function mk(any){const d=devicePixelRatio;return{x:Math.random()*c.width,y:any?Math.random()*c.height:c.height+10,r:(.8+Math.random()*1.8)*d,v:(.2+Math.random()*.5)*d,w:Math.random()*6.28,a:.3+Math.random()*.5}}
+  (function loop(){
+    g.clearRect(0,0,c.width,c.height);
+    E.forEach((e,k)=>{e.y-=e.v;e.w+=.02;e.x+=Math.sin(e.w)*.3;
+      g.globalAlpha=e.a*(.6+.4*Math.sin(e.w*3));g.fillStyle="#ffc94a";
+      g.beginPath();g.arc(e.x,e.y,e.r,0,6.28);g.fill();
+      if(e.y<-10)E[k]=mk(false);});
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
